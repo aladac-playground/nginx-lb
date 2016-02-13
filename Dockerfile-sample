@@ -1,0 +1,9 @@
+FROM alpine:3.2
+RUN apk -U add ruby ruby-io-console
+RUN echo "gem: --no-ri --no-rdoc" > /root/.gemrc
+RUN gem install bundler
+COPY Gemfile /app/Gemfile
+COPY config.ru /app/config.ru
+WORKDIR /app
+RUN bundle install
+CMD bundle exec rackup -p 80
