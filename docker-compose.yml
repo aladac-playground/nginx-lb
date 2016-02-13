@@ -1,3 +1,9 @@
+lb:
+  image: nginx-lb
+
+etcd:
+  image: etcd
+
 web1:
   image: nginx
   ports:

@@ -1,7 +1,6 @@
 FROM phusion/baseimage:0.9.18
 RUN apt-get update -yq
 RUN apt-get install -yq nginx
-RUN mkdir -p /etc/confd/{conf.d,templates}
 RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 -o /sbin/confd
 RUN chmod +x /sbin/confd
 RUN curl -L  https://github.com/coreos/etcd/releases/download/v2.2.5/etcd-v2.2.5-linux-amd64.tar.gz -o etcd-v2.2.5-linux-amd64.tar.gz
