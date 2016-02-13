@@ -1,0 +1,19 @@
+web1:
+  image: nginx
+  ports:
+    - 8001:80
+
+web2:
+  image: nginx
+  ports:
+    - 8002:80
+
+web3:
+  image: nginx
+  ports:
+    - 8003:80
+
+web4:
+  image: nginx
+  ports:
+    - 8004:80
