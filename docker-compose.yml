@@ -1,45 +1,15 @@
-version: '2'
+etcd:
+  image: quay.io/coreos/etcd:v2.2.5
+  ports:
+    - "4001:4001"
+  command: >
+    --listen-client-urls 'http://localhost:2379,http://0.0.0.0:4001'
+    --advertise-client-urls 'http://localhost:2379,http://192.168.99.100:4001'
 
-services:
-  lb:
-    build:
-      context: .
-      dockerfile: Dockerfile.alpine
-    ports:
-     - "80:8080"
-  etcd:
-    image: quay.io/coreos/etcd:v2.2.5
-    entrypoint: >
-      --listen-client-urls 'http://localhost:2379,http://0.0.0.0:4001'
-      --advertise-client-urls 'http://localhost:2379,http://192.168.99.100:4001'
-  web1:
-    build:
-      dockerfile: Dockerfile-sample
-    environment:
-      - APP_NAME=app1
-    ports:
-      - 8001:80
-
-  web2:
-    build:
-      dockerfile: Dockerfile-sample
-    environment:
-      - APP_NAME=app1
-    ports:
-      - 8002:80
-
-  web3:
-    build:
-      dockerfile: Dockerfile-sample
-    environment:
-      - APP_NAME=app2
-    ports:
-      - 8003:80
-
-  web4:
-    build:
-      dockerfile: Dockerfile-sample
-    environment:
-      - APP_NAME=app2
-    ports:
-      - 8004:80
+lb:
+  image: nginx-lb
+  environment:
+    - "ETCD_ADDR=http://192.168.99.100:4001"
+    - "ETCD_INTERVAL=10"
+  ports:
+   - "80:80"
