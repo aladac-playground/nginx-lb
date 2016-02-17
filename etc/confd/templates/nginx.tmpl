@@ -6,7 +6,6 @@ upstream {{base $dir}} {
 }
 
 server {
-    server_name {{base $dir}}.example.com;
     {{$custdir := printf "/services/web/%s/domains/*" $dir}}{{range gets $custdir}}
     server_name {{.Value}};
     {{end}}
