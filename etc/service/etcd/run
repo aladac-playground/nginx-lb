@@ -1,5 +1,0 @@
-#!/bin/sh
-
-exec /sbin/etcd \
-  --listen-client-urls 'http://localhost:2379,http://0.0.0.0:4001' \
-  --advertise-client-urls 'http://localhost:2379,http://localhost:4001'
